@@ -13,6 +13,8 @@ public class ConcreteSubject implements Subject {
 
     private LinkedList<Observer> observers = new LinkedList<Observer>();
 
+    private int state;
+
     public void registerObserver(Observer observer) {
 
         checkArgument(observer != null, "Observer is missing");
@@ -39,5 +41,17 @@ public class ConcreteSubject implements Subject {
         for(Observer observer : observers){
             observer.update();
         }
+    }
+
+    public int getState(){
+        return state;
+    }
+
+    public void setState(int newState){
+
+        logger.debug("Change state from {} to {}", state, newState);
+
+        state = newState;
+        notifyObservers();
     }
 }

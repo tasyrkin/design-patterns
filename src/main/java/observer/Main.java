@@ -2,7 +2,7 @@ package observer;
 
 public class Main {
     public static void main(String[] args) {
-        Subject subject = new ConcreteSubject();
+        ConcreteSubject subject = new ConcreteSubject();
 
         Observer observer1 = new ConcreteObserver1();
         Observer observer2 = new ConcreteObserver2();
@@ -10,7 +10,7 @@ public class Main {
         subject.registerObserver(observer1);
         subject.registerObserver(observer2);
 
-        subject.notifyObservers();
+        subject.setState(10);
 
         subject.unregisterObserver(observer2);
         subject.unregisterObserver(observer1);
