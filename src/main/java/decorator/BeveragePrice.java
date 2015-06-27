@@ -1,7 +1,7 @@
 package decorator;
 
 import com.google.common.base.Preconditions;
-import javafx.util.Pair;
+import util.Pair;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -11,12 +11,20 @@ import static com.google.common.base.Preconditions.checkState;
 
 public class BeveragePrice{
 
-    private Map<DrinkSize, Integer> prices = new EnumMap<DrinkSize, Integer>(DrinkSize.class);
+    private final Map<DrinkSize, Integer> prices = new EnumMap<DrinkSize, Integer>(DrinkSize.class);
 
-    BeveragePrice(int smallSizePrice, int mediumSizePrice, int largeSizePrice){
+    public BeveragePrice(int smallSizePrice, int mediumSizePrice, int largeSizePrice){
         prices.put(DrinkSize.SMALL, smallSizePrice);
         prices.put(DrinkSize.MEDIUM, mediumSizePrice);
         prices.put(DrinkSize.LARGE, largeSizePrice);
+    }
+
+    public BeveragePrice(Pair<DrinkSize, Integer>... prices){
+        Preconditions.checkArgument(prices != null, "Prices are missing");
+
+        for(Pair<DrinkSize, Integer> price : prices){
+            this.prices.put(price.getFirst(), price.getSecond());
+        }
     }
 
     public int getPrice(DrinkSize drinkSize){
